@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo de Adivinhação</title>
+</head>
+<body>
+    <h2>Descubra o Número Secreto (1 a 100)</h2>
+    <input type="number" id="chute" placeholder="Digite seu palpite">
+    <button onclick="jogar()">Chutar</button>
+    <button onclick="reiniciar()">Reiniciar Jogo</button>
+
+    <p id="mensagem"></p>
+    <p id="tentativas">Tentativas: 0</p>
+
+    <script>
+        let numeroSecreto = Math.floor(Math.random() * 100) + 1;
+        let qteTentativas = 0;
+
+        function jogar() {
+            const chute = Number(document.getElementById('chute').value);
+            if(!chute) return;
+
+            qteTentativas++;
+            document.getElementById('tentativas').innerText = `Tentativas: ${qteTentativas}`;
+
+            const msgElement = document.getElementById('mensagem');
+            if (chute > numeroSecreto) {
+                msgElement.innerText = "Muito alto 📈";
+            } else if (chute < numeroSecreto) {
+                msgElement.innerText = "Muito baixo 📉";
+            } else {
+                msgElement.innerText = "🎉 Acertou! Parabéns!";
+            }
+        }
+
+        function reiniciar() {
+            numeroSecreto = Math.floor(Math.random() * 100) + 1;
+            qteTentativas = 0;
+            document.getElementById('tentativas').innerText = "Tentativas: 0";
+            document.getElementById('mensagem').innerText = "";
+            document.getElementById('chute').value = "";
+        }
+    </script>
+</body>
+</html>

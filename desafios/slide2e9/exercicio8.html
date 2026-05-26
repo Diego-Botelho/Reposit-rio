@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Detector de Palíndromos</title>
+</head>
+<body>
+    <h2>Detector de Palíndromos e Análise de Texto</h2>
+    <input type="text" id="frase" placeholder="Digite uma frase ou palavra">
+    <button onclick="analisarTexto()">Analisar</button>
+
+    <p id="caracteres">Quantidade de caracteres: </p>
+    <p id="palavras">Quantidade de palavras: </p>
+    <p id="invertida">Frase invertida: </p>
+    <p id="ePalindromo">É palíndromo? </p>
+
+    <script>
+        function analisarTexto() {
+            const textoOriginal = document.getElementById('frase').value;
+            if(!textoOriginal) return;
+
+            // Contagens básicas
+            document.getElementById('caracteres').innerText = `Quantidade de caracteres: ${textoOriginal.length}`;
+            const qtdPalavras = textoOriginal.trim() === "" ? 0 : textoOriginal.trim().split(/\s+/).length;
+            document.getElementById('palavras').innerText = `Quantidade de palavras: ${qtdPalavras}`;
+
+            // Inversão simples para amostragem visual
+            const textoInvertidoVisual = textoOriginal.split('').reverse().join('');
+            document.getElementById('invertida').innerText = `Frase invertida: ${textoInvertidoVisual}`;
+
+            // Tratamento específico para verificar se é palíndromo (ignora espaços e minúsculas/maiúsculas)
+            const textoLimpo = textoOriginal.toLowerCase().replace(/\s+/g, '');
+            const textoLimpoInvertido = textoLimpo.split('').reverse().join('');
+
+            if (textoLimpo === textoLimpoInvertido) {
+                document.getElementById('ePalindromo').innerText = "É palíndromo? Sim! ✅";
+            } else {
+                document.getElementById('ePalindromo').innerText = "É palíndromo? Não. ❌";
+            }
+        }
+    </script>
+</body>
+</html>

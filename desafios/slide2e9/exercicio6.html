@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedra, Papel e Tesoura</title>
+</head>
+<body>
+    <h2>Jokenpô contra o Computador</h2>
+    <button onclick="jogar('Pedra')">Pedra </button>
+    <button onclick="jogar('Papel')">Papel </button>
+    <button onclick="jogar('Tesoura')">Tesoura </button>
+
+    <h3>Resultado do Turno:</h3>
+    <p id="jogadas"></p>
+    <p id="vencedorTurno"></p>
+
+    <h3>Placar:</h3>
+    <p id="placar">Jogador: 0 | Computador: 0</p>
+
+    <script>
+        const opcoes = ['Pedra', 'Papel', 'Tesoura'];
+        let vitoriasJogador = 0;
+        let vitoriasComputador = 0;
+
+        function jogar(escolhaJogador) {
+            const escolhaComputador = opcoes[Math.floor(Math.random() * 3)];
+            document.getElementById('jogadas').innerText = `Você escolheu: ${escolhaJogador} | Máquina escolheu: ${escolhaComputador}`;
+
+            let msg = "";
+
+            if (escolhaJogador === escolhaComputador) {
+                msg = "Empate! 🤝";
+            } else if (
+                (escolhaJogador === 'Pedra' && escolhaComputador === 'Tesoura') ||
+                (escolhaJogador === 'Papel' && escolhaComputador === 'Pedra') ||
+                (escolhaJogador === 'Tesoura' && escolhaComputador === 'Papel')
+            ) {
+                msg = "Você venceu! 🎉";
+                vitoriasJogador++;
+            } else {
+                msg = "A máquina venceu! 🤖";
+                vitoriasComputador++;
+            }
+
+            document.getElementById('vencedorTurno').innerText = msg;
+            document.getElementById('placar').innerText = `Jogador: ${vitoriasJogador} | Computador: ${vitoriasComputador}`;
+        }
+    </script>
+</body>
+</html>

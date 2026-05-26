@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Caixa Eletrônico Inteligente</title>
+</head>
+<body>
+    <h2>Saque Caixa Eletrônico</h2>
+    <input type="number" id="valorSaque" placeholder="Valor do saque">
+    <button onclick="sacar()">Sacar</button>
+
+    <h3>Notas entregues:</h3>
+    <ul id="resultadoSaque"></ul>
+
+    <script>
+        function sacar() {
+            let valor = Math.floor(Number(document.getElementById('valorSaque').value));
+            const lista = document.getElementById('resultadoSaque');
+            lista.innerHTML = ""; // Limpa resultados anteriores
+
+            if (valor <= 0) return;
+
+            const notasDisponiveis = [100, 50, 20, 10, 5];
+
+            notasDisponiveis.forEach(nota => {
+                const qtdNotas = Math.floor(valor / nota);
+                valor = valor % nota; // Resto da divisão inteira
+
+                if (qtdNotas > 0) {
+                    const item = document.createElement('li');
+                    item.innerText = `${qtdNotas} nota(s) de R$ ${nota}`;
+                    lista.appendChild(item);
+                }
+            });
+
+            if (valor > 0) {
+                const itemResto = document.createElement('li');
+                itemResto.innerText = `Sobra não sacada (sem notas menores que R$ 5): R$ ${valor}`;
+                lista.appendChild(itemResto);
+            }
+        }
+    </script>
+</body>
+</html>

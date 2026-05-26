@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Organizador de Números</title>
+</head>
+<body>
+    <h2>Organizador de Números</h2>
+    <input type="text" id="listaNumeros" placeholder="Ex: 3,5,1,4,7,8,9">
+    <button onclick="ordenar()">Ordenar</button>
+
+    <p id="crescente">Ordem crescente: </p>
+    <p id="decrescente">Ordem decrescente: </p>
+
+    <script>
+        function ordenar() {
+            const input = document.getElementById('listaNumeros').value;
+            if(!input) return;
+
+            
+            let arrayNumeros = input.split(',').map(num => Number(num.trim()));
+
+            for (let i = 0; i < arrayNumeros.length; i++) {
+                for (let j = 0; j < arrayNumeros.length - 1 - i; j++) {
+                    if (arrayNumeros[j] > arrayNumeros[j + 1]) {
+                        let temp = arrayNumeros[j];
+                        arrayNumeros[j] = arrayNumeros[j + 1];
+                        arrayNumeros[j + 1] = temp;
+                    }
+                }
+            }
+
+            document.getElementById('crescente').innerText = `Ordem crescente: ${arrayNumeros.join(', ')}`;
+
+            // Cria a versão invertida (decrescente)
+            let arrayDecrescente = [...arrayNumeros].reverse();
+            document.getElementById('decrescente').innerText = `Ordem decrescente: ${arrayDecrescente.join(', ')}`;
+        }
+    </script>
+</body>
+</html>

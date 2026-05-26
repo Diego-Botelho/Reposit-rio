@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cards de Exercícios Rápidos</title>
+
+</head>
+<body>
+
+    <div class="card">
+        <h4>1. Par ou Ímpar</h4>
+        <input type="number" id="c1_num" placeholder="Digite um número">
+        <button onclick="c1()">Verificar</button>
+        <p id="c1_res"></p>
+    </div>
+
+    <div class="card">
+        <h4>2. Tabuada (1 a 10)</h4>
+        <input type="number" id="c2_num" placeholder="Digite a tabuada">
+        <button onclick="c2()">Gerar</button>
+        <div id="c2_res" style="white-space: pre-line; margin-top:10px;"></div>
+    </div>
+
+    <div class="card">
+        <h4>3. Classificação por Idade</h4>
+        <input type="number" id="c3_idade" placeholder="Digite a idade">
+        <button onclick="c3()">Classificar</button>
+        <p id="c3_res"></p>
+    </div>
+
+    <div class="card">
+        <h4>4. Sistema de Notas</h4>
+        <input type="number" id="c4_nota" placeholder="Nota de 0 a 10" step="0.1">
+        <button onclick="c4()">Verificar Status</button>
+        <p id="c4_res"></p>
+    </div>
+
+    <div class="card">
+        <h4>5. Maior de Dois Números</h4>
+        <input type="number" id="c5_n1" placeholder="Número 1">
+        <input type="number" id="c5_n2" placeholder="Número 2">
+        <button onclick="c5()">Comparar</button>
+        <p id="c5_res"></p>
+    </div>
+
+    <div class="card">
+        <h4>6. Pares entre 1 e 50</h4>
+        <button onclick="c6()">Mostrar Pares</button>
+        <p id="c6_res" style="word-break: break-all;"></p>
+    </div>
+
+    <div class="card">
+        <h4>7. Média de 5 números</h4>
+        <input type="text" id="c7_lista" placeholder="5 números separados por vírgula">
+        <button onclick="c7()">Calcular Média</button>
+        <p id="c7_res"></p>
+    </div>
+
+    <div class="card">
+        <h4>8. Conversor de Moeda (Fixo)</h4>
+        <input type="number" id="c8_reais" placeholder="Valor em R$" step="0.01">
+        <button onclick="c8()">Converter para US$</button>
+        <p id="c8_res"></p>
+    </div>
+
+    <div class="card">
+        <h4>9. Números Primos (1 a 100)</h4>
+        <button onclick="c9()">Listar Primos</button>
+        <p id="c9_res" style="word-break: break-all;"></p>
+    </div>
+
+    <div class="card">
+        <h4>10. Contador de Vogais</h4>
+        <input type="text" id="c10_palavra" placeholder="Digite uma palavra">
+        <button onclick="c10()">Contar</button>
+        <p id="c10_res"></p>
+    </div>
+
+    <div class="card">
+        <h4>11. Inverter Palavra</h4>
+        <input type="text" id="c11_palavra" placeholder="Digite uma palavra">
+        <button onclick="c11()">Inverter</button>
+        <p id="c11_res"></p>
+    </div>
+
+    <div class="card">
+        <h4>12. Sequência de Fibonacci</h4>
+        <input type="number" id="c12_num" placeholder="Até que número?">
+        <button onclick="c12()">Gerar</button>
+        <p id="c12_res" style="word-break: break-all;"></p>
+    </div>
+
+    <script>
+        // 1. Par ou Ímpar
+        function c1() {
+            const n = Number(document.getElementById('c1_num').value);
+            document.getElementById('c1_res').innerText = (n % 2 === 0) ? "O número é Par" : "O número é Ímpar";
+        }
+
+        // 2. Tabuada
+        function c2() {
+            const n = Number(document.getElementById('c2_num').value);
+            let result = "";
+            for(let i=1; i<=10; i++) { result += `${n} x ${i} = ${n*i}\n`; }
+            document.getElementById('c2_res').innerText = result;
+        }
+
+        // 3. Classificação Idade
+        function c3() {
+            const idade = Number(document.getElementById('c3_idade').value);
+            let c = "";
+            if(idade < 12) c = "Criança";
+            else if(idade < 18) c = "Adolescente";
+            else if(idade < 60) c = "Adulta";
+            else c = "Idosa";
+            document.getElementById('c3_res').innerText = c;
+        }
+
+        // 4. Notas
+        function c4() {
+            const nota = Number(document.getElementById('c4_nota').value);
+            let s = "";
+            if(nota >= 7) s = "Aprovado";
+            else if(nota >= 5) s = "Recuperação";
+            else s = "Reprovado";
+            document.getElementById('c4_res').innerText = s;
+        }
+
+        // 5. Maior de Dois
+        function c5() {
+            const n1 = Number(document.getElementById('c5_n1').value);
+            const n2 = Number(document.getElementById('c5_n2').value);
+            document.getElementById('c5_res').innerText = n1 > n2 ? `Maior: ${n1}` : n2 > n1 ? `Maior: ${n2}` : "Eles são iguais";
+        }
+
+        // 6. Pares de 1 a 50
+        function c6() {
+            let pares = [];
+            for(let i=1; i<=50; i++) { if(i % 2 === 0) pares.push(i); }
+            document.getElementById('c6_res').innerText = pares.join(', ');
+        }
+
+        // 7. Média de 5 números
+        function c7() {
+            const arr = document.getElementById('c7_lista').value.split(',').map(Number);
+            if(arr.length !== 5) { document.getElementById('c7_res').innerText = "Insira exatamente 5 valores."; return; }
+            let soma = arr.reduce((acc, curr) => acc + curr, 0);
+            document.getElementById('c7_res').innerText = `Média: ${(soma / 5).toFixed(2)}`;
+        }
+
+        // 8. Conversor de Moeda
+        function c8() {
+            const reais = Number(document.getElementById('c8_reais').value);
+            const cotacaoFixa = 5.25; // Exemplo de cotação fixa
+            document.getElementById('c8_res').innerText = `US$ ${(reais / cotacaoFixa).toFixed(2)}`;
+        }
+
+        // 9. Números Primos entre 1 e 100
+        function c9() {
+            let primos = [];
+            for(let i=2; i<=100; i++) {
+                let ePrimo = true;
+                for(let j=2; j<=Math.sqrt(i); j++) {
+                    if(i % j === 0) { ePrimo = false; break; }
+                }
+                if(ePrimo) primos.push(i);
+            }
+            document.getElementById('c9_res').innerText = primos.join(', ');
+        }
+
+        // 10. Contador de Vogais
+        function c10() {
+            const palavra = document.getElementById('c10_palavra').value.toLowerCase();
+            const match = palavra.match(/[aeiouáéíóúâêîôûãõ]/gi);
+            document.getElementById('c10_res').innerText = `Quantidade de Vogais: ${match ? match.length : 0}`;
+        }
+
+        // 11. Inverter Palavra
+        function c11() {
+            const p = document.getElementById('c11_palavra').value;
+            document.getElementById('c11_res').innerText = p.split('').reverse().join('');
+        }
+
+        // 12. Fibonacci até o número limite
+        function c12() {
+            const limite = Number(document.getElementById('c12_num').value);
+            let seq = [0, 1];
+            if(limite === 0) seq = [0];
+            while(true) {
+                let proximo = seq[seq.length - 1] + seq[seq.length - 2];
+                if(proximo > limite) break;
+                seq.push(proximo);
+            }
+            document.getElementById('c12_res').innerText = seq.join(', ');
+        }
+    </script>
+</body>
+</html>
